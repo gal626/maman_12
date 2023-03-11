@@ -1,7 +1,7 @@
 #include<stdio.h>
-//To use realloc in our program
 #include<stdlib.h>
 
+/* TODO: change size */
 #define ENLARGE_SIZE 2
 
 int contains(const int *ptr, int current_size, int n){
@@ -13,37 +13,44 @@ int contains(const int *ptr, int current_size, int n){
     return 0;
 }
 
-int main()
-{
-    int *ptr,size,i,j;
+int * get_set(int *length_of_inputs){
+    int *ptr, size, num;
 
-    /*
-     * Let's create memory for 2 integers
-     * size = ENLARGE_SIZE
-     */
     size = ENLARGE_SIZE;
+    /*allocate a memory for integers in amount of size*/
     ptr = malloc(size * sizeof(int));
-    int x = 0;
-    j = 0;
+
     printf("insert_numbers\n");
-    while( scanf("%d", &x) != EOF ){
-        if(!contains(ptr, j, x)){
-            if (j == size){
+    while(scanf("%d", &num) != EOF ){
+        if(!contains(ptr, *length_of_inputs, num)){
+            if (*length_of_inputs == size){
                 size+=ENLARGE_SIZE;
                 ptr = realloc(ptr, size * sizeof(int));
-                printf("size is %d\n", size);
+                printf("size is %d\n", size); /* TODO: only for debug */
             }
-            *(ptr + j) = x;
-            j+=1;
+            *(ptr + *length_of_inputs) = num;
+            *length_of_inputs+=1;
         }
         else{
-            printf("%d already in set\n", x);
+            printf("%d already in set\n", num); /* TODO: only for debug */
         }
     }
+    return ptr;
+}
 
-    //printing elements
-    for(i = 0; i < j; i++)
+void print_set(int *ptr, int length_of_inputs){
+    //printing all input numbers
+    int i;
+    for(i = 0; i < length_of_inputs; i++)
         printf("%d\n",ptr[i]);
+}
 
+int main()
+{
+    /* number of integers received from the input*/
+    int length_of_inputs;
+    length_of_inputs = 0;
+    int *ptr = get_set(&length_of_inputs);
+    print_set(ptr, length_of_inputs);
     return 0;
 }
