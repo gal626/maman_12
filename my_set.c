@@ -46,9 +46,9 @@ int * get_set(int *length_of_inputs){
 
 /* print 'length_of_inputs' elements starting from the pointer ptr */
 void print_set(int *ptr, int length_of_inputs){
-    //printing all input numbers
-    printf("set is: (");
+    /* printing all input numbers */
     int i;
+    printf("set is: (");
     for(i = 0; i < length_of_inputs-1; i++)
         printf("%d, ",ptr[i]);
     printf("%d)", ptr[i]);
@@ -58,9 +58,9 @@ void print_set(int *ptr, int length_of_inputs){
 int main()
 {
     /* number of integers received from the input, initialized to 0*/
-    int length_of_inputs;
+    int length_of_inputs, *ptr;
     length_of_inputs = 0;
-    int *ptr = get_set(&length_of_inputs);
+    ptr = get_set(&length_of_inputs);
     print_set(ptr, length_of_inputs);
     return 0;
 }
